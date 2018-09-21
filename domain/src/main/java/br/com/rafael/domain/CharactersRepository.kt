@@ -1,8 +1,8 @@
 package br.com.rafael.domain
 
-import br.com.rafael.domain.entities.CharacterEntity
+import br.com.rafael.domain.entities.ResultEntity
 import io.reactivex.Observable
 
 interface CharactersRepository {
-    fun getCharacters(): Observable<List<CharacterEntity>>
+    fun getCharacters(): Observable<ResultEntity>
 }
