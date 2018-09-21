@@ -1,8 +1,12 @@
 package br.com.rafael.domain
 
-import br.com.rafael.domain.entities.CharacterEntity
+import br.com.rafael.domain.entities.ResultEntity
 import io.reactivex.Observable
 
 interface CharactersDataStore {
-    fun getCharacters(): Observable<List<CharacterEntity>>
+    fun getCharacters(
+            ts: Long,
+            apikey: String,
+            hash: String
+    ): Observable<ResultEntity>
 }
