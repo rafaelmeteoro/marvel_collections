@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MarvelCollections</string>
+    <string name="characters">Personagens</string>
+    <string name="my_favorites">Favoritos</string>
 </resources>
