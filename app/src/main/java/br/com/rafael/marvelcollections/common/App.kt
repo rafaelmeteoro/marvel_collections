@@ -1,9 +1,19 @@
 package br.com.rafael.marvelcollections.common
 
 import android.app.Application
+import br.com.rafael.marvelcollections.di.DaggerMainComponent
+import br.com.rafael.marvelcollections.di.MainComponent
+import br.com.rafael.marvelcollections.di.characters.CharactersModule
+import br.com.rafael.marvelcollections.di.characters.CharactersSubComponent
+import br.com.rafael.marvelcollections.di.modules.AppModule
+import br.com.rafael.marvelcollections.di.modules.DataModule
+import br.com.rafael.marvelcollections.di.modules.NetworkModule
 import com.squareup.leakcanary.LeakCanary
 
 class App : Application() {
+
+    lateinit var mainComponent: MainComponent
+    private var charactersSubComponent: CharactersSubComponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -12,5 +22,24 @@ class App : Application() {
             return
         }
         LeakCanary.install(this)
+
+        initDependencies()
+    }
+
+    private fun initDependencies() {
+        mainComponent = DaggerMainComponent.builder()
+                .appModule(AppModule(applicationContext))
+                .networkModule(NetworkModule(""))
+                .dataModule(DataModule())
+                .build()
+    }
+
+    fun createCharactersComponent(): CharactersSubComponent {
+        charactersSubComponent = mainComponent.plus(CharactersModule())
+        return charactersSubComponent!!
+    }
+
+    fun releaseCharactersComponent() {
+        charactersSubComponent = null
     }
 }
