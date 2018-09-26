@@ -14,11 +14,12 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import br.com.rafael.marvelcollections.R
 import br.com.rafael.marvelcollections.common.App
+import br.com.rafael.marvelcollections.common.BaseFragment
 import br.com.rafael.marvelcollections.common.ImageLoader
 import kotlinx.android.synthetic.main.fragment_characters.*
 import javax.inject.Inject
 
-class CharactersFragment : Fragment() {
+class CharactersFragment : BaseFragment() {
 
     @Inject
     lateinit var factory: CharactersVMFactory
@@ -66,7 +67,9 @@ class CharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         progressBar = characters_progress
         recyclerView = characters_recyclerview
-        charactersAdapter = CharactersAdapter(imageLoader)
+        charactersAdapter = CharactersAdapter(imageLoader, { character, itemView ->
+            navigateToCharacterDetailScreen(character, itemView)
+        })
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = charactersAdapter
     }
