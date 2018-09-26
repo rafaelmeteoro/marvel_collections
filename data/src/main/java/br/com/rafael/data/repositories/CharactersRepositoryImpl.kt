@@ -2,6 +2,7 @@ package br.com.rafael.data.repositories
 
 import br.com.rafael.domain.CharactersRepository
 import br.com.rafael.domain.entities.CharacterEntity
+import br.com.rafael.domain.entities.Optional
 import io.reactivex.Observable
 
 class CharactersRepositoryImpl(
@@ -20,5 +21,9 @@ class CharactersRepositoryImpl(
                         }
             }
         }
+    }
+
+    override fun getCharacterDetail(characterId: Int): Observable<Optional<CharacterEntity>> {
+        return remoteDataStore.getCharacterDetail(characterId)
     }
 }
