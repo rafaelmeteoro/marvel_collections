@@ -10,8 +10,8 @@ class RemoteCharactersDataStore(private val api: Api) : CharactersDataStore {
 
     private val characterDataMapper = CharactersDataEntityMapper()
 
-    override fun getCharacters(ts: Long, apikey: String, hash: String): Observable<List<CharacterEntity>> {
-        return api.getCharacters(ts, apikey, hash).map { results ->
+    override fun getCharacters(): Observable<List<CharacterEntity>> {
+        return api.getCharacters().map { results ->
             results.data?.results?.map { characterDataMapper.mapFrom(it) }
         }
     }

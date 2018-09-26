@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 class CachedCharactersDataStore(private val charactersCache: CharactersCache) : CharactersDataStore {
 
-    override fun getCharacters(ts: Long, apikey: String, hash: String): Observable<List<CharacterEntity>> {
+    override fun getCharacters(): Observable<List<CharacterEntity>> {
         return charactersCache.getAll()
     }
 

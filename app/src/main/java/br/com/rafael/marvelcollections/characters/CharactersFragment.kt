@@ -1,5 +1,6 @@
 package br.com.rafael.marvelcollections.characters
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import br.com.rafael.marvelcollections.R
 import br.com.rafael.marvelcollections.common.App
 import br.com.rafael.marvelcollections.common.ImageLoader
@@ -30,6 +32,26 @@ class CharactersFragment : Fragment() {
         super.onCreate(savedInstanceState)
         (activity?.application as App).createCharactersComponent().inject(this)
         viewModel = ViewModelProviders.of(this, factory).get(CharactersViewModel::class.java)
+
+        if (savedInstanceState == null) {
+            viewModel.getCharacters()
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.viewState.observe(this, Observer {
+            if (it != null) handleViewState(it)
+        })
+        viewModel.errorState.observe(this, Observer { throwable ->
+            throwable?.let {
+                Toast.makeText(activity, throwable.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun handleViewState(state: CharactersViewState) {
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

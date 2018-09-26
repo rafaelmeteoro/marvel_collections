@@ -1,6 +1,7 @@
 package br.com.rafael.marvelcollections.common
 
 import android.app.Application
+import br.com.rafael.marvelcollections.R
 import br.com.rafael.marvelcollections.di.DaggerMainComponent
 import br.com.rafael.marvelcollections.di.MainComponent
 import br.com.rafael.marvelcollections.di.characters.CharactersModule
@@ -29,7 +30,7 @@ class App : Application() {
     private fun initDependencies() {
         mainComponent = DaggerMainComponent.builder()
                 .appModule(AppModule(applicationContext))
-                .networkModule(NetworkModule(""))
+                .networkModule(NetworkModule(getString(R.string.api_base_url), getString(R.string.api_key)))
                 .dataModule(DataModule())
                 .build()
     }

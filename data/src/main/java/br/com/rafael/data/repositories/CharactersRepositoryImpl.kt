@@ -9,12 +9,12 @@ class CharactersRepositoryImpl(
         private val remoteDataStore: RemoteCharactersDataStore
 ) : CharactersRepository {
 
-    override fun getCharacters(ts: Long, apikey: String, hash: String): Observable<List<CharacterEntity>> {
+    override fun getCharacters(): Observable<List<CharacterEntity>> {
         return cachedDataStore.isEmpty().flatMap { empty ->
             if (!empty) {
-                return@flatMap cachedDataStore.getCharacters(ts, apikey, hash)
+                return@flatMap cachedDataStore.getCharacters()
             } else {
-                return@flatMap remoteDataStore.getCharacters(ts, apikey, hash)
+                return@flatMap remoteDataStore.getCharacters()
                         .doOnNext { characters ->
                             cachedDataStore.saveAll(characters)
                         }

@@ -5,7 +5,7 @@ import br.com.rafael.domain.entities.CharacterEntity
 import br.com.rafael.domain.entities.Optional
 import io.reactivex.Observable
 
-class MemoryCharactersMoviesCache : CharactersCache {
+class MemoryCharactersCache : CharactersCache {
 
     private val characters: LinkedHashMap<Int, CharacterEntity> = LinkedHashMap()
 
