@@ -25,6 +25,8 @@ class NetworkModule(private val baseUrl: String, private val apiKey: String) {
 
             val url = originalHttpUrl.newBuilder()
                     .addQueryParameter("apikey", apiKey)
+                    .addQueryParameter("hash", "hash")
+                    .addQueryParameter("ts", 1.toString())
                     .build()
 
             val requestBuilder = original.newBuilder()
