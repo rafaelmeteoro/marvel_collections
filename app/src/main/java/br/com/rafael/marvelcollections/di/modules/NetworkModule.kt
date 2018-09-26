@@ -49,7 +49,15 @@ class NetworkModule(private val baseUrl: String,
 
     @Singleton
     @Provides
-    fun provideRetrofit(interceptors: ArrayList<Interceptor>): Retrofit {
+    fun provideHttpLogginInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(interceptors: ArrayList<Interceptor>, logging: HttpLoggingInterceptor): Retrofit {
         val clientBuilder = OkHttpClient.Builder()
         if (!interceptors.isEmpty()) {
             interceptors.forEach { interceptor ->
@@ -57,9 +65,7 @@ class NetworkModule(private val baseUrl: String,
             }
         }
 
-        val loggin = HttpLoggingInterceptor()
-        loggin.level = HttpLoggingInterceptor.Level.BODY
-        clientBuilder.addInterceptor(loggin)
+        clientBuilder.addInterceptor(logging)
 
         return Retrofit.Builder()
                 .client(clientBuilder.build())

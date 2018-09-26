@@ -4,6 +4,8 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +29,7 @@ class CharactersFragment : Fragment() {
     private lateinit var viewModel: CharactersViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var charactersAdapter: CharactersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +54,8 @@ class CharactersFragment : Fragment() {
     }
 
     private fun handleViewState(state: CharactersViewState) {
-
+        progressBar.visibility = if (state.showLoading) View.VISIBLE else View.GONE
+        state.characters?.let { charactersAdapter.addCharacters(it) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,6 +66,9 @@ class CharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         progressBar = characters_progress
         recyclerView = characters_recyclerview
+        charactersAdapter = CharactersAdapter(imageLoader)
+        recyclerView.layoutManager = GridLayoutManager(activity, 2)
+        recyclerView.adapter = charactersAdapter
     }
 
     override fun onDestroy() {
