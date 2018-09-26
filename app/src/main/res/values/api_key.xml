@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="api_key">Paste The Mavel api key here</string>
+    <string name="public_api_key">Paste The Marvel public api key here</string>
+    <string name="private_api_key">Paste The Marvel private api key here</string>
 </resources>
