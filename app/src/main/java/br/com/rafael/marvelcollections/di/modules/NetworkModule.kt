@@ -1,6 +1,7 @@
 package br.com.rafael.marvelcollections.di.modules
 
 import br.com.rafael.data.api.Api
+import br.com.rafael.marvelcollections.extensions.md5
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -9,10 +10,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import javax.inject.Singleton
 
 @Module
-class NetworkModule(private val baseUrl: String, private val apiKey: String) {
+class NetworkModule(private val baseUrl: String,
+                    private val publicApiKey: String,
+                    private val privateApiKey: String) {
 
     @Singleton
     @Provides
@@ -23,10 +27,12 @@ class NetworkModule(private val baseUrl: String, private val apiKey: String) {
             val original = chain.request()
             val originalHttpUrl = original.url()
 
+            val timestamp = Calendar.getInstance().timeInMillis.toString()
+
             val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("apikey", apiKey)
-                    .addQueryParameter("hash", "hash")
-                    .addQueryParameter("ts", 1.toString())
+                    .addQueryParameter("apikey", publicApiKey)
+                    .addQueryParameter("hash", (timestamp + privateApiKey + publicApiKey).md5())
+                    .addQueryParameter("ts", timestamp)
                     .build()
 
             val requestBuilder = original.newBuilder()

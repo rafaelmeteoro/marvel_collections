@@ -30,7 +30,7 @@ class App : Application() {
     private fun initDependencies() {
         mainComponent = DaggerMainComponent.builder()
                 .appModule(AppModule(applicationContext))
-                .networkModule(NetworkModule(getString(R.string.api_base_url), getString(R.string.public_api_key)))
+                .networkModule(NetworkModule(getString(R.string.api_base_url), getString(R.string.public_api_key), getString(R.string.private_api_key)))
                 .dataModule(DataModule())
                 .build()
     }
