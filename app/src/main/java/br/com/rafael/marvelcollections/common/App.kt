@@ -6,6 +6,8 @@ import br.com.rafael.marvelcollections.di.DaggerMainComponent
 import br.com.rafael.marvelcollections.di.MainComponent
 import br.com.rafael.marvelcollections.di.characters.CharactersModule
 import br.com.rafael.marvelcollections.di.characters.CharactersSubComponent
+import br.com.rafael.marvelcollections.di.details.CharacterDetailsModule
+import br.com.rafael.marvelcollections.di.details.CharacterDetailsSubComponent
 import br.com.rafael.marvelcollections.di.modules.AppModule
 import br.com.rafael.marvelcollections.di.modules.DataModule
 import br.com.rafael.marvelcollections.di.modules.NetworkModule
@@ -15,6 +17,7 @@ class App : Application() {
 
     lateinit var mainComponent: MainComponent
     private var charactersSubComponent: CharactersSubComponent? = null
+    private var detailsSubComponent: CharacterDetailsSubComponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -42,5 +45,14 @@ class App : Application() {
 
     fun releaseCharactersComponent() {
         charactersSubComponent = null
+    }
+
+    fun createDetailsSubComponent(): CharacterDetailsSubComponent {
+        detailsSubComponent = mainComponent.plus(CharacterDetailsModule())
+        return detailsSubComponent!!
+    }
+
+    fun releaseDetailsComponent() {
+        detailsSubComponent = null
     }
 }

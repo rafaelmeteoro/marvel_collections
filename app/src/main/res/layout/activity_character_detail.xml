@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/details_root_view"
@@ -61,6 +61,7 @@
                 android:background="@color/white"
                 android:elevation="8dp"
                 android:scaleType="centerCrop"
+                android:transitionName="@string/transition_poster"
                 tools:src="@mipmap/ic_launcher" />
 
             <TextView
@@ -77,8 +78,30 @@
                 tools:text="The character name"
                 tools:visibility="visible" />
 
+            <include
+                android:id="@+id/details_description_section"
+                layout="@layout/details_description_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/details_poster"
+                android:layout_marginStart="@dimen/generic_margin"
+                android:layout_marginTop="@dimen/generic_margin"
+                android:layout_marginEnd="@dimen/generic_margin"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/details_favorite_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/generic_margin"
+        android:src="@drawable/ic_favorite_border_white_24dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</android.support.design.widget.CoordinatorLayout>
