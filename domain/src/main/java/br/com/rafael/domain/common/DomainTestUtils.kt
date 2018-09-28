@@ -19,8 +19,8 @@ class DomainTestUtils {
             )
         }
 
-        fun generateCharacterEntityList(): List<CharacterEntity> {
-            return (0..4).map { getTestCharacterEntity(it) }
+        fun generateCharacterEntityList(size: Int): List<CharacterEntity> {
+            return (1..size).map { getTestCharacterEntity(it) }
         }
     }
 }
