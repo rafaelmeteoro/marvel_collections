@@ -15,16 +15,16 @@ class GetCharacterDetail(
         private const val PARAM_CHARACTER_ENTITY = "param:characterEntity"
     }
 
-    fun getById(characterId: Int): Observable<Optional<CharacterEntity>> {
-        val data = HashMap<String, Int>()
-        data[PARAM_CHARACTER_ENTITY] = characterId
-        return observable(data)
-    }
-
     override fun createObservable(data: Map<String, Any>?): Observable<Optional<CharacterEntity>> {
         val characterId = data?.get(PARAM_CHARACTER_ENTITY)
         characterId?.let {
             return charactersRepository.getCharacterDetail(it as Int)
         } ?: return Observable.error({ IllegalArgumentException("CharacterId must be provided.") })
+    }
+
+    fun getById(characterId: Int): Observable<Optional<CharacterEntity>> {
+        val data = HashMap<String, Int>()
+        data[PARAM_CHARACTER_ENTITY] = characterId
+        return observable(data)
     }
 }

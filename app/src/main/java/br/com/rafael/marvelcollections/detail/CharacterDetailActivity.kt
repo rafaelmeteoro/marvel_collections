@@ -110,7 +110,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         transition.excludeTarget(posterImage, true)
         transition.duration = 750
         TransitionManager.beginDelayedTransition(details_root_view, transition)
-        
+
         name.visibility = View.VISIBLE
         details_description_section.visibility =
                 if (!state.description.isNullOrEmpty()) View.VISIBLE else View.GONE
