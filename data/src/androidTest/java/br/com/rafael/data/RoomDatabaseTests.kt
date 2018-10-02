@@ -67,13 +67,13 @@ class RoomDatabaseTests {
         val characterData = DataTestsUtils.getMockedCharacterData(432)
         characterDao.saveCharacter(characterData)
         val characters = characterDao.getCharacters()
-        val (id, name, description, modified, path, extension) = characters[0]
+        val (id, name, description, modified, thumbnail) = characters[0]
         Assert.assertEquals(id, characterData.id)
         Assert.assertEquals(name, characterData.name)
         Assert.assertEquals(description, characterData.description)
         Assert.assertEquals(modified, characterData.modified)
-        Assert.assertEquals(path, characterData.path)
-        Assert.assertEquals(extension, characterData.extension)
+        Assert.assertEquals(thumbnail.path, characterData.thumbnail.path)
+        Assert.assertEquals(thumbnail.extension, characterData.thumbnail.extension)
     }
 
     @Test

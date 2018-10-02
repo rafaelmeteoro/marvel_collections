@@ -16,7 +16,7 @@ class CharacterEntityDataMapper @Inject constructor() : Mapper<CharacterEntity, 
                 name = from.name,
                 description = from.description,
                 modified = from.modified,
-                path = from.thumbnail.path,
-                extension = from.thumbnail.extension)
+                thumbnail = ThumbnailData(from.thumbnail.path, from.thumbnail.extension)
+        )
     }
 }

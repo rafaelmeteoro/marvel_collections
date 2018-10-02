@@ -19,8 +19,8 @@ class MappersTests {
         Assert.assertEquals(characterEntity.name, characterData.name)
         Assert.assertEquals(characterEntity.description, characterData.description)
         Assert.assertEquals(characterEntity.modified, characterData.modified)
-        Assert.assertEquals(characterEntity.thumbnail.path, characterData.path)
-        Assert.assertEquals(characterEntity.thumbnail.extension, characterData.extension)
+        Assert.assertEquals(characterEntity.thumbnail.path, characterData.thumbnail.path)
+        Assert.assertEquals(characterEntity.thumbnail.extension, characterData.thumbnail.extension)
     }
 
     @Test
@@ -33,7 +33,7 @@ class MappersTests {
         Assert.assertEquals(characterEntity.name, characterData.name)
         Assert.assertEquals(characterEntity.description, characterData.description)
         Assert.assertEquals(characterEntity.modified, characterData.modified)
-        Assert.assertEquals(characterEntity.thumbnail.path, characterData.path)
-        Assert.assertEquals(characterEntity.thumbnail.extension, characterData.extension)
+        Assert.assertEquals(characterEntity.thumbnail.path, characterData.thumbnail.path)
+        Assert.assertEquals(characterEntity.thumbnail.extension, characterData.thumbnail.extension)
     }
 }

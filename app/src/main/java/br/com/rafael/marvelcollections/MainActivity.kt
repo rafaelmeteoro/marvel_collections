@@ -1,8 +1,8 @@
 package br.com.rafael.marvelcollections
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import br.com.rafael.marvelcollections.characters.CharactersFragment
 import kotlinx.android.synthetic.main.activity_main.*

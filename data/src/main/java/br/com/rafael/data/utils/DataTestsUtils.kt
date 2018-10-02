@@ -1,6 +1,7 @@
 package br.com.rafael.data.utils
 
 import br.com.rafael.data.entities.CharacterData
+import br.com.rafael.data.entities.ThumbnailData
 
 class DataTestsUtils {
 
@@ -11,8 +12,8 @@ class DataTestsUtils {
                     name = name,
                     description = "Description$id",
                     modified = "Modified$id",
-                    path = "Path$id",
-                    extension = "Extension$id")
+                    thumbnail = ThumbnailData(path = "Path$id", extension = "Extension$id")
+            )
         }
 
         fun generateCharacterDataList(size: Int): List<CharacterData> {
