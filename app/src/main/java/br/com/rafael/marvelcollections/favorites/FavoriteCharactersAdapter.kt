@@ -1,4 +1,4 @@
-package br.com.rafael.marvelcollections.characters
+package br.com.rafael.marvelcollections.favorites
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,18 +7,16 @@ import android.view.ViewGroup
 import br.com.rafael.marvelcollections.R
 import br.com.rafael.marvelcollections.common.ImageLoader
 import br.com.rafael.marvelcollections.entities.Character
-import kotlinx.android.synthetic.main.character_adapter_cell.view.*
+import kotlinx.android.synthetic.main.favorite_characters_adapter_row.view.*
 
-class CharactersAdapter constructor(
-        private val imageLoader: ImageLoader,
-        private val onCharacterSelected: (Character, View) -> Unit
-) : RecyclerView.Adapter<CharactersAdapter.CharacterCellViewHolder>() {
+class FavoriteCharactersAdapter constructor(private val imageLoader: ImageLoader,
+                                            private val onCharacterSelected: (Character, View) -> Unit) : RecyclerView.Adapter<FavoriteCharactersAdapter.CharacterCellViewHolder>() {
 
-    private val characters: MutableList<Character> = mutableListOf()
+    private var characters: List<Character> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterCellViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-                R.layout.character_adapter_cell,
+                R.layout.favorite_characters_adapter_row,
                 parent,
                 false)
         return CharacterCellViewHolder(view)
@@ -33,8 +31,8 @@ class CharactersAdapter constructor(
         holder.bind(character, imageLoader, onCharacterSelected)
     }
 
-    fun addCharacters(characters: List<Character>) {
-        this.characters.addAll(characters)
+    fun setCharacters(characters: List<Character>) {
+        this.characters = characters
         notifyDataSetChanged()
     }
 
@@ -45,6 +43,12 @@ class CharactersAdapter constructor(
             val extension = character.thumbnail?.extension
             if (path != null && extension != null) {
                 imageLoader.load("$path.$extension", image)
+            }
+            character.description?.let {
+                description.text = character.description
+                description.visibility = View.VISIBLE
+            } ?: run {
+                description.visibility = View.GONE
             }
             character_card.setOnClickListener { listener(character, itemView) }
         }
