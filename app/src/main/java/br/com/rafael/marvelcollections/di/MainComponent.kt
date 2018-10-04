@@ -4,6 +4,8 @@ import br.com.rafael.marvelcollections.di.characters.CharactersModule
 import br.com.rafael.marvelcollections.di.characters.CharactersSubComponent
 import br.com.rafael.marvelcollections.di.details.CharacterDetailsModule
 import br.com.rafael.marvelcollections.di.details.CharacterDetailsSubComponent
+import br.com.rafael.marvelcollections.di.favorites.FavoriteModule
+import br.com.rafael.marvelcollections.di.favorites.FavoriteSubComponent
 import br.com.rafael.marvelcollections.di.modules.AppModule
 import br.com.rafael.marvelcollections.di.modules.DataModule
 import br.com.rafael.marvelcollections.di.modules.NetworkModule
@@ -19,4 +21,5 @@ import javax.inject.Singleton
 interface MainComponent {
     fun plus(charactersModule: CharactersModule): CharactersSubComponent
     fun plus(characterDetailsModule: CharacterDetailsModule): CharacterDetailsSubComponent
+    fun plus(favoriteModule: FavoriteModule): FavoriteSubComponent
 }

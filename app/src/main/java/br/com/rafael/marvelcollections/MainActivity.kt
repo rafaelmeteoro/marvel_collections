@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import br.com.rafael.marvelcollections.characters.CharactersFragment
+import br.com.rafael.marvelcollections.favorites.FavoriteCharactersFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +38,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         .replace(R.id.container, CharactersFragment(), "characters")
                         .commitNow()
                 title = getString(R.string.characters)
+            }
+            R.id.action_favorites -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, FavoriteCharactersFragment(), "favorites")
+                        .commitNow()
+                title = getString(R.string.my_favorites)
             }
         }
 
