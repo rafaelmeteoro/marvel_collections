@@ -5,5 +5,6 @@ data class Character(
         var name: String? = null,
         var description: String? = null,
         var modified: String? = null,
-        var thumbnail: Thumbnail? = null
+        var thumbnail: Thumbnail? = null,
+        var isFavorite: Boolean = false
 )

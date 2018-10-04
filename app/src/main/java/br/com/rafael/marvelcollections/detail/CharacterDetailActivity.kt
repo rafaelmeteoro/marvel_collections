@@ -1,11 +1,13 @@
 package br.com.rafael.marvelcollections.detail
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.transition.Slide
 import android.transition.TransitionManager
@@ -67,10 +69,11 @@ class CharacterDetailActivity : AppCompatActivity() {
         backButton = details_back_button
         backButton.setOnClickListener { finish() }
         favoriteButton = details_favorite_fab
+        favoriteButton.setOnClickListener { detailsViewModel.favoriteButtonClicked() }
 
         val posterUrl = intent.getStringExtra(CHARACTER_IMAGE_URL)
-        posterUrl?.let {
-            imageLoader.load(it, posterImage) {
+        posterUrl?.let { url ->
+            imageLoader.load(url, posterImage) {
                 startPostponedEnterTransition()
             }
         } ?: run {
@@ -118,8 +121,16 @@ class CharacterDetailActivity : AppCompatActivity() {
         state.backdropUrl?.let { imageLoader.load(it, backdropImage) }
     }
 
+    @SuppressLint("RestrictedApi")
     private fun handleFavoriteStateChange(favorite: Boolean?) {
-
+        if (favorite == null) return
+        favoriteButton.visibility = View.VISIBLE
+        favoriteButton.setImageDrawable(
+                if (favorite)
+                    ContextCompat.getDrawable(this, R.drawable.ic_favorite_white_24dp)
+                else
+                    ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white_24dp)
+        )
     }
 
     override fun onDestroy() {
