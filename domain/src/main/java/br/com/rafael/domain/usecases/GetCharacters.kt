@@ -7,10 +7,10 @@ import io.reactivex.Observable
 
 class GetCharacters(
         transformer: Transformer<List<CharacterEntity>>,
-        private val charactersRepository: CharactersRepository
+        private val repository: CharactersRepository
 ) : UseCase<List<CharacterEntity>>(transformer) {
 
     override fun createObservable(data: Map<String, Any>?): Observable<List<CharacterEntity>> {
-        return charactersRepository.getCharacters()
+        return repository.getCharacters()
     }
 }

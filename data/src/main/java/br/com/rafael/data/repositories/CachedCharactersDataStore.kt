@@ -6,21 +6,21 @@ import br.com.rafael.domain.entities.CharacterEntity
 import br.com.rafael.domain.entities.Optional
 import io.reactivex.Observable
 
-class CachedCharactersDataStore(private val charactersCache: CharactersCache) : CharactersDataStore {
+class CachedCharactersDataStore(private val cache: CharactersCache) : CharactersDataStore {
 
     override fun getCharacters(): Observable<List<CharacterEntity>> {
-        return charactersCache.getAll()
+        return cache.getAll()
     }
 
     override fun getCharacterDetail(characterId: Int): Observable<Optional<CharacterEntity>> {
-        return charactersCache.get(characterId)
+        return cache.get(characterId)
     }
 
     fun isEmpty(): Observable<Boolean> {
-        return charactersCache.isEmpty()
+        return cache.isEmpty()
     }
 
     fun saveAll(charactersEntities: List<CharacterEntity>) {
-        charactersCache.saveAll(charactersEntities)
+        cache.saveAll(charactersEntities)
     }
 }

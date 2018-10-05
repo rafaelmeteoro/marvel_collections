@@ -18,23 +18,23 @@ import javax.inject.Named
 class CharacterDetailsModule {
 
     @Provides
-    fun provideGetCharacterDetailsUseCase(charactersRepository: CharactersRepository): GetCharacterDetail {
-        return GetCharacterDetail(ASyncTransformer(), charactersRepository)
+    fun provideGetCharacterDetailsUseCase(repository: CharactersRepository): GetCharacterDetail {
+        return GetCharacterDetail(ASyncTransformer(), repository)
     }
 
     @Provides
-    fun provideCheckFavoriteStatus(@Named(DI.favoritesCache) charactersCache: CharactersCache): CheckFavoriteStatus {
-        return CheckFavoriteStatus(ASyncTransformer(), charactersCache)
+    fun provideCheckFavoriteStatus(@Named(DI.favoritesCache) cache: CharactersCache): CheckFavoriteStatus {
+        return CheckFavoriteStatus(ASyncTransformer(), cache)
     }
 
     @Provides
-    fun provideSaveFavoriteCharacter(@Named(DI.favoritesCache) charactersCache: CharactersCache): SaveFavoriteCharacter {
-        return SaveFavoriteCharacter(ASyncTransformer(), charactersCache)
+    fun provideSaveFavoriteCharacter(@Named(DI.favoritesCache) cache: CharactersCache): SaveFavoriteCharacter {
+        return SaveFavoriteCharacter(ASyncTransformer(), cache)
     }
 
     @Provides
-    fun provideRemoveFavoriteCharacter(@Named(DI.favoritesCache) charactersCache: CharactersCache): RemoveFavoriteCharacter {
-        return RemoveFavoriteCharacter(ASyncTransformer(), charactersCache)
+    fun provideRemoveFavoriteCharacter(@Named(DI.favoritesCache) cache: CharactersCache): RemoveFavoriteCharacter {
+        return RemoveFavoriteCharacter(ASyncTransformer(), cache)
     }
 
     @Provides

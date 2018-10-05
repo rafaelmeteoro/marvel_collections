@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 class RemoveFavoriteCharacter(
         transformer: Transformer<Boolean>,
-        private val charactersCache: CharactersCache
+        private val cache: CharactersCache
 ) : UseCase<Boolean>(transformer) {
 
     companion object {
@@ -20,11 +20,11 @@ class RemoveFavoriteCharacter(
         characterEntity?.let {
             return Observable.fromCallable {
                 val entity = it as CharacterEntity
-                charactersCache.remove(entity)
+                cache.remove(entity)
                 return@fromCallable false
             }
         }
-                ?: return Observable.error({ IllegalArgumentException("CharacterEntity must be provided.") })
+                ?: return Observable.error { IllegalArgumentException("CharacterEntity must be provided.") }
     }
 
     fun remove(characterEntity: CharacterEntity): Observable<Boolean> {

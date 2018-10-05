@@ -17,7 +17,7 @@ import com.squareup.leakcanary.LeakCanary
 
 class App : Application() {
 
-    lateinit var mainComponent: MainComponent
+    private lateinit var mainComponent: MainComponent
     private var charactersSubComponent: CharactersSubComponent? = null
     private var detailsSubComponent: CharacterDetailsSubComponent? = null
     private var favoriteSubComponent: FavoriteSubComponent? = null

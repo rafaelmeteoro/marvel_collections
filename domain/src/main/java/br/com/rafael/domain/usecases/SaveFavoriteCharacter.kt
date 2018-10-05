@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 class SaveFavoriteCharacter(
         transformer: Transformer<Boolean>,
-        private val charactersCache: CharactersCache
+        private val cache: CharactersCache
 ) : UseCase<Boolean>(transformer) {
 
     companion object {
@@ -20,10 +20,10 @@ class SaveFavoriteCharacter(
         characterEntity?.let {
             return Observable.fromCallable {
                 val entity = it as CharacterEntity
-                charactersCache.save(entity)
+                cache.save(entity)
                 return@fromCallable true
             }
-        } ?: return Observable.error({ IllegalArgumentException("CharacterId must be provided.") })
+        } ?: return Observable.error { IllegalArgumentException("CharacterId must be provided.") }
     }
 
     fun save(characterEntity: CharacterEntity): Observable<Boolean> {

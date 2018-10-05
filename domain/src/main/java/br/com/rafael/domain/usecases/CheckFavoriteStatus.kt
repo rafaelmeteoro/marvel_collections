@@ -6,7 +6,7 @@ import io.reactivex.Observable
 
 class CheckFavoriteStatus(
         transformer: Transformer<Boolean>,
-        private val charactersCache: CharactersCache
+        private val cache: CharactersCache
 ) : UseCase<Boolean>(transformer) {
 
     companion object {
@@ -16,10 +16,10 @@ class CheckFavoriteStatus(
     override fun createObservable(data: Map<String, Any>?): Observable<Boolean> {
         val characterId = data?.get(PARAM_CHARACTER_ENTITY)
         characterId?.let {
-            return charactersCache.get(it as Int).flatMap { optionalCharacterEntity ->
+            return cache.get(it as Int).flatMap { optionalCharacterEntity ->
                 return@flatMap Observable.just(optionalCharacterEntity.hasValue())
             }
-        } ?: return Observable.error({ IllegalArgumentException("CharacterId must be provided.") })
+        } ?: return Observable.error { IllegalArgumentException("CharacterId must be provided.") }
     }
 
     fun check(characterId: Int): Observable<Boolean> {

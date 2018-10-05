@@ -7,10 +7,10 @@ import io.reactivex.Observable
 
 class GetFavoriteCharacters(
         transformer: Transformer<List<CharacterEntity>>,
-        private val charactersCache: CharactersCache
+        private val cache: CharactersCache
 ) : UseCase<List<CharacterEntity>>(transformer) {
 
     override fun createObservable(data: Map<String, Any>?): Observable<List<CharacterEntity>> {
-        return charactersCache.getAll()
+        return cache.getAll()
     }
 }

@@ -14,8 +14,8 @@ import javax.inject.Named
 class FavoriteModule {
 
     @Provides
-    fun provideGetFavoriteCharacters(@Named(DI.favoritesCache) charactersCache: CharactersCache): GetFavoriteCharacters {
-        return GetFavoriteCharacters(ASyncTransformer(), charactersCache)
+    fun provideGetFavoriteCharacters(@Named(DI.favoritesCache) cache: CharactersCache): GetFavoriteCharacters {
+        return GetFavoriteCharacters(ASyncTransformer(), cache)
     }
 
     @Provides

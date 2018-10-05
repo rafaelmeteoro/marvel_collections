@@ -13,8 +13,8 @@ import dagger.Provides
 class CharactersModule {
 
     @Provides
-    fun provideGetCharactersUseCase(charactersRepository: CharactersRepository): GetCharacters {
-        return GetCharacters(ASyncTransformer(), charactersRepository)
+    fun provideGetCharactersUseCase(repository: CharactersRepository): GetCharacters {
+        return GetCharacters(ASyncTransformer(), repository)
     }
 
     @Provides
